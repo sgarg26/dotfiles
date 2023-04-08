@@ -14,4 +14,4 @@ o.cursorline = true
 
 vim.keymap.set('n', '<leader>h', ':nohlsearch<CR>')
 vim.keymap.set('n', '<c-t>', ':tabedit ')
-vim.keymap.set('n', '<c-w>', ':q<CR>')
+vim.keymap.set('n', '<c-T>', ':q<CR>')
