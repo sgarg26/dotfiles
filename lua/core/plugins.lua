@@ -20,6 +20,12 @@ return require('packer').startup(function(use)
     use 'nvim-lualine/lualine.nvim'
     use 'nvim-treesitter/nvim-treesitter'
     use {
+        "Fildo7525/pretty_hover",
+        config = function()
+            require("pretty_hover").setup(options)
+        end
+    }
+    use {
         "windwp/nvim-autopairs",
         config = function() require("nvim-autopairs").setup {} end
     }

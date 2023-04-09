@@ -156,10 +156,11 @@ _G.packer_plugins = {
     path = "/home/sgarg26/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
   },
-  ["scrollbar.nvim"] = {
+  pretty_hover = {
+    config = { "\27LJ\2\nF\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0006\2\3\0B\0\2\1K\0\1\0\foptions\nsetup\17pretty_hover\frequire\0" },
     loaded = true,
-    path = "/home/sgarg26/.local/share/nvim/site/pack/packer/start/scrollbar.nvim",
-    url = "https://github.com/Xuyuanp/scrollbar.nvim"
+    path = "/home/sgarg26/.local/share/nvim/site/pack/packer/start/pretty_hover",
+    url = "https://github.com/Fildo7525/pretty_hover"
   },
   ["telescope.nvim"] = {
     loaded = true,
@@ -179,6 +180,10 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
+-- Config for: pretty_hover
+time([[Config for pretty_hover]], true)
+try_loadstring("\27LJ\2\nF\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0006\2\3\0B\0\2\1K\0\1\0\foptions\nsetup\17pretty_hover\frequire\0", "config", "pretty_hover")
+time([[Config for pretty_hover]], false)
 -- Config for: gitsigns.nvim
 time([[Config for gitsigns.nvim]], true)
 try_loadstring("\27LJ\2\n6\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\rgitsigns\frequire\0", "config", "gitsigns.nvim")
