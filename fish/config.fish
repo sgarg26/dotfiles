@@ -13,4 +13,6 @@ set -g fish_greeting
 set PATH $HOME/.cargo/bin $PATH
 starship init fish | source
 
+set -x MOZ_ENABLE_WAYLAND 1
+
 set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin $PATH /home/sgarg26/.ghcup/bin # ghcup-env
