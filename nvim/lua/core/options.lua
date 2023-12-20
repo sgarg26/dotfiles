@@ -16,5 +16,4 @@ o.pumheight = 10
 
 opt.laststatus = 3
 opt.showmode = false
-
-
+vim.wo.nu = true
