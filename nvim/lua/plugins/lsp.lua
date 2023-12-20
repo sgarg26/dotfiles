@@ -58,16 +58,18 @@ return {
     {'hrsh7th/cmp-nvim-lsp'},
     {
         'hrsh7th/nvim-cmp',
+        dependencies = { 'onsails/lspkind.nvim' },
         event = "InsertEnter",
         config = function()
+            local lspkind = require('lspkind')
             local cmp = require('cmp')
             local cmp_action = require('lsp-zero').cmp_action()
 
             cmp.setup({
                 experimental = { ghost_text = true },
                 window = {
-                    completion = cmp.config.window.bordered(),
-                    documentation = cmp.config.window.bordered(),
+                    --[[ completion = cmp.config.window.bordered(),
+                    documentation = cmp.config.window.bordered(), ]]
                 },
                 mapping = cmp.mapping.preset.insert({
                     -- `Enter` key to confirm completion
@@ -85,7 +87,15 @@ return {
                     -- Scroll up and down in the completion documentation
                     ['<C-u>'] = cmp.mapping.scroll_docs(-4),
                     ['<C-d>'] = cmp.mapping.scroll_docs(4),
-                })
+                }),
+                formatting = {
+                    format = lspkind.cmp_format({
+                        mode = 'symbol_text', -- show only symbol annotations
+                        preset = 'codicons',
+                        maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+                        ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
+                    })
+                }
             })
         end
 
