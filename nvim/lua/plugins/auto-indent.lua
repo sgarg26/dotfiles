@@ -1,5 +1,7 @@
 return {
     'vidocqh/auto-indent.nvim',
     event = "LspAttach",
-    opts = {},
+    config = function ()
+        require('auto-indent').setup()
+    end
 }
