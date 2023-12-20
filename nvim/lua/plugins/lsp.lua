@@ -41,8 +41,10 @@ return {
     },
     {
         'neovim/nvim-lspconfig',
+        dependencies = 'folke/neodev.nvim',
         event = { "BufReadPre", "BufNewFile" },
         config = function()
+            require("neodev").setup()
             require("lsp-zero").extend_lspconfig()
             require('lspconfig').lua_ls.setup({
                 settings = {
