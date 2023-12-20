@@ -12,6 +12,11 @@ local dap = {
         }
     },
     {
+        'theHamsta/nvim-dap-virtual-text',
+        event = "BufAdd",
+        opts = {}
+    },
+    {
         'rcarriga/nvim-dap-ui',
         event = "BufAdd",
         dependencies = "mfussenegger/nvim-dap",
