@@ -16,4 +16,5 @@ o.pumheight = 10
 
 opt.laststatus = 3
 opt.showmode = false
+opt.cursorline = true
 vim.wo.nu = true
