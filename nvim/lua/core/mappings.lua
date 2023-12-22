@@ -4,6 +4,7 @@ local keymap = vim.keymap.set
 keymap("n", "<Esc>", "<cmd>noh<cr>", { silent = true } ) -- map esc to no highlighting
 keymap("i", "<S-Tab>", "<C-d>", { silent = true } ) -- map shift-tab to reverse indent like vscode
 keymap("n", "<leader>ll", "<cmd>Lazy<cr>", {})
+keymap("n", "<leader>mm", "<cmd>Mason<cr>", {})
 
 -- Bufferline keymaps
 keymap("n", "<Tab>", "<cmd>BufferLineCycleNext<cr>", { silent = true } )
