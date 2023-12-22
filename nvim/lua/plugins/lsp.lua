@@ -1,52 +1,41 @@
 return {
     {
-        'williamboman/mason.nvim',
+        "williamboman/mason.nvim", -- Nice UI for installing lsps, linters, dap etc. 
         cmd = "Mason",
-        config = function()
-            require("mason").setup({
-                ui = {
-                    border = "rounded",
-                    icons = {
-                        package_installed = "✓",
-                        package_pending = "➜",
-                        package_uninstalled = "✗"
-                    }
+        opts = {
+            ui = {
+                border = "rounded",
+                icons = {
+                    package_installed = "✓",
+                    package_pending = "➜",
+                    package_uninstalled = "✗"
                 }
-            })
-        end
+            }
+        }
     },
-    {'williamboman/mason-lspconfig.nvim'},
     {
-        'VonHeikemen/lsp-zero.nvim',
+        "folke/neodev.nvim",
         event = "LspAttach",
-        branch = 'v3.x',
-        config = function()
-            local lsp_zero = require('lsp-zero')
-
-            lsp_zero.on_attach(function(client, bufnr)
-                lsp_zero.default_keymaps({buffer = bufnr})
-                local opts = { buffer = bufnr }
-
-                vim.keymap.set("n", "<leader>ra", "<cmd>lua vim.lsp.buf.rename()<cr>", opts )
-            end)
-
-            require('mason').setup({})
-            require('mason-lspconfig').setup({
-                ensure_installed = { 'lua_ls', 'pyright', 'clangd' },
-                handlers = {
-                    lsp_zero.default_setup,
-                },
-            })
-        end
-    },
-    {
-        'neovim/nvim-lspconfig',
-        dependencies = 'folke/neodev.nvim',
-        event = { "BufReadPre", "BufNewFile" },
         config = function()
             require("neodev").setup()
-            require("lsp-zero").extend_lspconfig()
-            require('lspconfig').lua_ls.setup({
+        end
+    },
+    {
+        "williamboman/mason-lspconfig.nvim", -- Bridges the gap between lsp-config and Mason. 
+        event = "LspAttach",
+        opts = {
+            ensure_installed = { "pyright", "clangd", "lua_ls", "debugpy" }
+        }
+    },
+    {
+        "neovim/nvim-lspconfig",
+        event = { "BufReadPre", "BufNewFile" },
+        config = function()
+            -- local servers = { "pyright", "clangd", "lua_ls", "debugpy" }
+            local lspconfig = require("lspconfig")
+            lspconfig.clangd.setup({})
+            lspconfig.pyright.setup({})
+            lspconfig.lua_ls.setup({
                 settings = {
                     Lua = {
                         diagnostics = {
@@ -57,49 +46,71 @@ return {
             })
         end
     },
-    {'hrsh7th/cmp-nvim-lsp'},
     {
-        'hrsh7th/nvim-cmp',
-        dependencies = { 'onsails/lspkind.nvim' },
-        event = "InsertEnter",
+        'hrsh7th/nvim-cmp', -- Autocompletion
+        event = "LspAttach",
+        dependencies = {
+            'L3MON4D3/LuaSnip',
+            'saadparwaiz1/cmp_luasnip',
+            -- Adds LSP completion capabilities
+            'hrsh7th/cmp-nvim-lsp',
+            'hrsh7th/cmp-path',
+            -- Adds a number of user-friendly snippets
+            'rafamadriz/friendly-snippets',
+            'onsails/lspkind.nvim'
+        },
         config = function()
-            local lspkind = require('lspkind')
-            local cmp = require('cmp')
-            local cmp_action = require('lsp-zero').cmp_action()
-
+            local cmp = require("cmp")
+            local lspkind = require("lspkind")
+            local luasnip = require("luasnip")
+            require("luasnip.loaders.from_vscode").lazy_load()
             cmp.setup({
-                experimental = { ghost_text = true },
-                window = {
-                    --[[ completion = cmp.config.window.bordered(),
-                    documentation = cmp.config.window.bordered(), ]]
-                },
-                mapping = cmp.mapping.preset.insert({
-                    -- `Enter` key to confirm completion
-                    ['<CR>'] = cmp.mapping.confirm({select = true}),
-                    ['<Tab>'] = cmp.mapping.select_next_item(),
-                    ['<S-Tab>'] = cmp.mapping.select_prev_item(),
-
-                    -- Ctrl+Space to trigger completion menu
-                    ['<C-Space>'] = cmp.mapping.complete(),
-
-                    -- Navigate between snippet placeholder
-                    ['<C-f>'] = cmp_action.luasnip_jump_forward(),
-                    ['<C-b>'] = cmp_action.luasnip_jump_backward(),
-
-                    -- Scroll up and down in the completion documentation
-                    ['<C-u>'] = cmp.mapping.scroll_docs(-4),
-                    ['<C-d>'] = cmp.mapping.scroll_docs(4),
-                }),
                 formatting = {
                     format = lspkind.cmp_format({
-                        mode = 'symbol_text', -- show only symbol annotations
-                        preset = 'codicons',
-                        maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
-                        ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
-                    })
-                }
+                        mode = 'symbol',
+                        maxwidth = 50,
+                        ellipsis_char = '...',
+                    })},
+                experimental = { ghost_text = true },
+                snippet = {
+                    expand = function(args)
+                        luasnip.lsp_expand(args.body)
+                    end,
+                },
+                completion = {
+                    completeopt = "menu,menuone,noinsert"
+                },
+                mapping = cmp.mapping.preset.insert({
+                    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+                    ['<C-u>'] = cmp.mapping.scroll_docs(4),
+                    ['<C-Space>'] = cmp.mapping.complete(),
+                    ['<C-e>'] = cmp.mapping.abort(),
+                    ['<CR>'] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
+                    ['<Tab>'] = cmp.mapping(function(fallback)
+                        if cmp.visible() then
+                            cmp.select_next_item()
+                        elseif luasnip.expand_or_locally_jumpable() then
+                            luasnip.expand_or_jump()
+                        else
+                            fallback()
+                        end
+                    end, { 'i', 's' }),
+                    ['<S-Tab>'] = cmp.mapping(function(fallback)
+                        if cmp.visible() then
+                            cmp.select_prev_item()
+                        elseif luasnip.locally_jumpable(-1) then
+                            luasnip.jump(-1)
+                        else
+                            fallback()
+                        end
+                    end, { 'i', 's' }),
+                }),
+                sources = cmp.config.sources({
+                    { name = 'nvim_lsp' },
+                    { name = 'luasnip' },
+                    { name = 'path' },
+                }),
             })
         end
     },
-    {'L3MON4D3/LuaSnip'},
 }
