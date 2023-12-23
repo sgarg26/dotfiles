@@ -1,7 +1,7 @@
 return {
     {
         "williamboman/mason.nvim", -- Nice UI for installing lsps, linters, dap etc. 
-        cmd = "Mason",
+        lazy = false,
         opts = {
             ui = {
                 border = "rounded",
@@ -24,7 +24,7 @@ return {
         "williamboman/mason-lspconfig.nvim", -- Bridges the gap between lsp-config and Mason. 
         event = "LspAttach",
         opts = {
-            ensure_installed = { "pyright", "clangd", "lua_ls", "debugpy" }
+            ensure_installed = { "pyright", "clangd", "lua_ls" }
         }
     },
     {
@@ -113,4 +113,27 @@ return {
             })
         end
     },
+    {
+        "nvimdev/lspsaga.nvim",
+        dependencies = {
+            'nvim-treesitter/nvim-treesitter',
+            'nvim-tree/nvim-web-devicons'
+        },
+        event = "LspAttach",
+        config = function()
+            local saga = require("lspsaga")
+            saga.setup ({
+                lightbulb = { virtual_text = false },
+                ui = {
+                },
+                symbol_in_winbar = {
+                    enable = false
+                }
+                --[[ error_sign = ' ',
+                warn_sign = ' ',
+                hint_sign = '',
+                infor_sign = ' ', ]]
+            })
+        end
+    }
 }

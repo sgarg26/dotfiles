@@ -25,6 +25,7 @@ opt.laststatus = 3
 opt.showmode = false
 opt.cursorline = true
 opt.termguicolors = true
+opt.signcolumn = "yes"
 
 -- Enable absolute line numbers
 vim.wo.nu = true

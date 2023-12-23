@@ -13,7 +13,7 @@ keymap("n", "<leader>x", "<cmd>bdelete!<cr>", { silent = true } )
 
 -- Lsp keymaps
 local buf = vim.lsp.buf
-keymap("n", "K", buf.hover, {})
+keymap("n", "K", "<cmd>Lspsaga hover_doc<cr>", {})
 keymap("n", "<leader>rn", buf.rename, {})
 keymap("n", "<leader>gD", buf.declaration, {})
 keymap("n", "<leader>gd", buf.definition, {})
