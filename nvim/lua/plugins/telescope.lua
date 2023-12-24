@@ -22,7 +22,8 @@ return {
             { "<leader>ff", "<cmd>Telescope find_files<cr>" },
             { "<leader>fo", "<cmd>Telescope oldfiles<cr>" },
             { "<leader>fw", "<cmd>Telescope live_grep<cr>" },
-            { "<leader>fb", "<cmd>Telescope buffers<cr>" }
+            { "<leader>fb", "<cmd>Telescope buffers<cr>" },
+            { "<leader>mp", "<cmd>Telescope man_pages<cr>" }
         },
         dependencies = { 'nvim-lua/plenary.nvim' },
         opts = {

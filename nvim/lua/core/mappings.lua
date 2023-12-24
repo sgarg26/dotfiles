@@ -19,3 +19,6 @@ keymap("n", "<leader>gD", buf.declaration, {})
 keymap("n", "<leader>gd", buf.definition, {})
 keymap("n", "<leader>gi", buf.implementation, {})
 keymap("n", "<leader>ca", buf.code_action, {})
+
+-- Trouble keymaps
+keymap("n", "<leader>tt", "<cmd>Trouble<cr>", {})
