@@ -31,11 +31,9 @@ return {
         "neovim/nvim-lspconfig",
         event = { "BufReadPre", "BufNewFile" },
         config = function()
-            -- local servers = { "pyright", "clangd", "lua_ls", "debugpy" }
             local lspconfig = require("lspconfig")
             lspconfig.clangd.setup({})
-            -- lspconfig.pyright.setup({})
-            lspconfig.pylsp.setup({})
+            lspconfig.pyright.setup({})
             lspconfig.lua_ls.setup({
                 settings = {
                     Lua = {
