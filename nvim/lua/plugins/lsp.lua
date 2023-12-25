@@ -24,7 +24,7 @@ return {
         "williamboman/mason-lspconfig.nvim", -- Bridges the gap between lsp-config and Mason. 
         event = "LspAttach",
         opts = {
-            ensure_installed = { "pyright", "clangd", "lua_ls" }
+            ensure_installed = { "pyright", "clangd", "lua_ls", "pylsp" }
         }
     },
     {
@@ -34,7 +34,8 @@ return {
             -- local servers = { "pyright", "clangd", "lua_ls", "debugpy" }
             local lspconfig = require("lspconfig")
             lspconfig.clangd.setup({})
-            lspconfig.pyright.setup({})
+            -- lspconfig.pyright.setup({})
+            lspconfig.pylsp.setup({})
             lspconfig.lua_ls.setup({
                 settings = {
                     Lua = {
@@ -57,14 +58,20 @@ return {
             'hrsh7th/cmp-path',
             -- Adds a number of user-friendly snippets
             'rafamadriz/friendly-snippets',
-            'onsails/lspkind.nvim'
+            'onsails/lspkind.nvim',
+            'windwp/nvim-autopairs'
         },
         config = function()
             local cmp = require("cmp")
             local lspkind = require("lspkind")
+            local cmp_autopairs = require("nvim-autopairs.completion.cmp")
             local luasnip = require("luasnip")
             require("luasnip.loaders.from_vscode").lazy_load()
             cmp.setup({
+                cmp.event:on(
+                    'confirm_done',
+                    cmp_autopairs.on_confirm_done()
+                ),
                 formatting = {
                     format = lspkind.cmp_format({
                         mode = 'text_symbol', -- options: 'text', 'text_symbol', 'symbol_text', 'symbol'

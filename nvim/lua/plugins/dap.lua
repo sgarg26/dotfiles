@@ -37,6 +37,7 @@ local dap = {
     },
     {
         'mfussenegger/nvim-dap',
+        ft = { 'python', 'cpp', 'c' },
         config = function(_, opts)
             vim.keymap.set("n", "<leader>db", "<cmd>DapToggleBreakpoint<cr>")
             vim.keymap.set("n", "<leader>dc", "<cmd>DapContinue<cr>")
@@ -45,9 +46,34 @@ local dap = {
             vim.keymap.set("n", "<A-s>", "<cmd>DapStepInto<cr>")
             vim.keymap.set("n", "<A-o>", "<cmd>DapStepOut<cr>")
             vim.keymap.set("n", "<A-n>", "<cmd>DapStepOver<cr>")
+            local dap = require("dap")
+            dap.configurations.python = {
+                {
+                    type = 'python';
+                    request = 'launch';
+                    name = 'Launch file';
+                    program = '${file}';
+                    pythonPath = function()
+                        return '/usr/bin/python'
+                    end;
+                },
+            }
+            --[[ dap.adapters.gdb{
+                type = 'executable',
+                command = '/usr/bin/gdb',
+                name = 'gdb'
+            }
+            dap.configurations.c = {
+                {
+                    type = 'gdb';
+                    request = 'launch';
+                    name = 'Launch file';
+                    program = ''
+                }
+            } ]]
         end
     },
-    {
+    --[[ {
         'mfussenegger/nvim-dap-python',
         ft = { 'python' },
         dependencies = { 'mfussenegger/nvim-dap', 'rcarriga/nvim-dap-ui', },
@@ -63,7 +89,7 @@ local dap = {
             vim.keymap.set("n", "<A-n>", "<cmd>DapStepOver<cr>")
             -- require("core.utils").load_mappings("dap")
         end,
-    },
+    }, ]]
 }
 
 return dap
