@@ -7,7 +7,8 @@ return {
                 "dashboard",
                 "TelescopePrompt",
                 "help",
-                "neo-tree"
+                "neo-tree",
+                "leetcode.nvim"
             }
         },
         highlight = {
