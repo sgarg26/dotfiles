@@ -1,8 +1,5 @@
-return {
-    "nvimdev/dashboard-nvim",
-    event = "VimEnter",
-    opts = function()
-        local logo = [[
+
+local logo = [[
            ██╗      █████╗ ███████╗██╗   ██╗██╗   ██╗██╗███╗   ███╗          Z
            ██║     ██╔══██╗╚══███╔╝╚██╗ ██╔╝██║   ██║██║████╗ ████║      Z    
            ██║     ███████║  ███╔╝  ╚████╔╝ ██║   ██║██║██╔████╔██║   z       
@@ -11,7 +8,34 @@ return {
            ╚══════╝╚═╝  ╚═╝╚══════╝   ╚═╝     ╚═══╝  ╚═╝╚═╝     ╚═╝           
       ]]
 
-        logo = string.rep("\n", 8) .. logo .. "\n\n"
+local logo2 = [[
+                                                                           
+             ████ ██████           █████      ██                     
+            ███████████             █████                             
+            █████████ ███████████████████ ███   ███████████   
+           █████████  ███    █████████████ █████ ██████████████   
+          █████████ ██████████ █████████ █████ █████ ████ █████   
+        ███████████ ███    ███ █████████ █████ █████ ████ █████  
+       ██████  █████████████████████ ████ █████ █████ ████ ██████ 
+    ]]
+
+local headers = {
+    logo,
+    logo2
+}
+
+local get_header = function()
+    math.randomseed(os.clock())
+    local index = math.random() * #headers
+    return headers[math.floor(index) + 1]
+end
+
+return {
+    "nvimdev/dashboard-nvim",
+    event = "VimEnter",
+    opts = function()
+
+        logo = string.rep("\n", 8) .. get_header() .. "\n\n"
 
         local opts = {
             theme = "doom",
