@@ -1,3 +1,25 @@
+local float = {
+    --nvim_open_win() options
+    relative = "cursor",
+    -- "single": A single line box.
+    -- "double": A double line box.
+    -- "rounded": Like "single", but with rounded corners "╭"
+    -- "solid": Adds padding by a single whitespace cell.
+    -- "shadow": A drop shadow effect by blending with the
+    -- "none": No border (default).
+    border = "shadow",
+    -- vim.lsp.util.open_floating_preview()
+    max_width = math.floor(vim.o.columns * 0.84),
+    max_height = math.floor(vim.o.lines * 0.6),
+    close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+    focusable = false,
+    zindex = 3,
+    focus = false,
+    -- vim.diagnostic.open_float()
+    source = "if_many",
+    severity_sort = true,
+}
+
 return {
     {
         "williamboman/mason.nvim", -- Nice UI for installing lsps, linters, dap etc. 
@@ -30,6 +52,17 @@ return {
     {
         "neovim/nvim-lspconfig",
         event = { "BufReadPre", "BufNewFile" },
+        dependencies = {
+            "ray-x/lsp_signature.nvim",
+            opts = {
+                bind = true,
+                max_height = float.max_height,
+                max_width = float.max_width,
+                handler_opts = {
+                    border = float.border,
+                },
+            },
+        },
         config = function()
             local lspconfig = require("lspconfig")
             lspconfig.clangd.setup({})
