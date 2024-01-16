@@ -46,7 +46,7 @@ return {
         "williamboman/mason-lspconfig.nvim", -- Bridges the gap between lsp-config and Mason. 
         event = "LspAttach",
         opts = {
-            ensure_installed = { "pyright", "clangd", "lua_ls", "pylsp" }
+            ensure_installed = { "pyright", "clangd", "lua_ls", "tsserver", "html", "cssls" }
         }
     },
     {
@@ -65,6 +65,9 @@ return {
         },
         config = function()
             local lspconfig = require("lspconfig")
+            lspconfig.cssls.setup({})
+            lspconfig.tsserver.setup({})
+            lspconfig.html.setup({})
             lspconfig.clangd.setup({})
             lspconfig.pyright.setup({})
             lspconfig.lua_ls.setup({
