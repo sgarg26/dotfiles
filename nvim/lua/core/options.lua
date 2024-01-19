@@ -26,6 +26,8 @@ opt.showmode = false
 opt.cursorline = true
 opt.termguicolors = true
 opt.signcolumn = "yes"
+opt.scrolloff = 3
+opt.sidescrolloff = 3
 
 -- Enable absolute line numbers
 vim.wo.nu = true

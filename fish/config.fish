@@ -8,9 +8,11 @@ alias ..='cd ..'
 alias cat=bat
 alias btui=bluetuith
 alias hx=helix
+alias bsync="browser-sync start --server --files '*.css'"
 
 set -g fish_greeting
 set PATH $HOME/.cargo/bin $PATH
+set PATH ~/.npm-global/bin $PATH
 starship init fish | source
 
 set -x MOZ_ENABLE_WAYLAND 1
