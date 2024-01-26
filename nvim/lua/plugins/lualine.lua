@@ -2,8 +2,8 @@ return {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
     opts = {
-        theme = "tokyonight",
         options = {
+            theme = "tokyonight",
             disabled_filetypes = { statusline = { "dashboard" } }
         }
     }
