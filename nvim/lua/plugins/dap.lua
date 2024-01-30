@@ -39,6 +39,25 @@ local dap = {
         'mfussenegger/nvim-dap',
         ft = { 'python', 'cpp', 'c' },
         config = function(_, opts)
+            local dap = require("dap")
+            dap.adapters.gdb = {
+                type = "executable",
+                command = "gdb",
+                args = { "-i", "dap" }
+            }
+
+            dap.configurations.cpp = {
+                {
+                    name = "Launch",
+                    type = "gdb",
+                    request = "launch",
+                    program = function()
+                        return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+                    end,
+                    cwd = "${workspaceFolder}"
+                }
+            }
+            dap.configurations.c = dap.configurations.cpp
             vim.keymap.set("n", "<leader>db", "<cmd>DapToggleBreakpoint<cr>")
             vim.keymap.set("n", "<leader>dc", "<cmd>DapContinue<cr>")
             vim.keymap.set("n", "<leader>dt", "<cmd>DapTerminate<cr>")
