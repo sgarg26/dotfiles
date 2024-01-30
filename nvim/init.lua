@@ -1,6 +1,7 @@
 require('core.options')
 require('core.mappings')
 require('core.lazy')
+require('core.autocommands')
 
 -- local plugins = require("plugins")
 require("lazy").setup("plugins", {
