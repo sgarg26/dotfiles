@@ -2,7 +2,6 @@ return {
     {
         "tpope/vim-fugitive",
         cmd = "Git",
-        config = function() require("vim-fugitive").setup() end
     },
     {
         "kdheepak/lazygit.nvim",
@@ -17,6 +16,7 @@ return {
     },
     {
         "lewis6991/gitsigns.nvim",
+        -- enabled = false,
         event = { "BufReadPre", "BufNewFile", "BufAdd" },
         opts = {}
     }
