@@ -67,7 +67,8 @@ return {
             local lspconfig = require("lspconfig")
             lspconfig.cssls.setup({})
             lspconfig.tsserver.setup({})
-            lspconfig.html.setup({})
+            -- lspconfig.html.setup({})
+            lspconfig.emmet_language_server.setup({})
             lspconfig.clangd.setup({})
             lspconfig.pyright.setup({})
             lspconfig.lua_ls.setup({
