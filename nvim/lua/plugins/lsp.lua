@@ -65,13 +65,10 @@ return {
 		},
 		config = function()
 			local lspconfig = require("lspconfig")
-			lspconfig.cssls.setup({})
-			lspconfig.spectral.setup({})
-			lspconfig.tsserver.setup({})
-			-- lspconfig.html.setup({})
-			lspconfig.emmet_language_server.setup({})
-			lspconfig.clangd.setup({})
-			lspconfig.pyright.setup({})
+			local servers = { "html", "cssls", "spectral", "tsserver", "emmet_language_server", "clangd", "pyright" }
+			for _, lsp in ipairs(servers) do
+				lspconfig[lsp].setup({})
+			end
 			lspconfig.lua_ls.setup({
 				settings = {
 					Lua = {
