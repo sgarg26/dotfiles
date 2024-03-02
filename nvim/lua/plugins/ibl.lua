@@ -5,7 +5,7 @@ return {
 	config = function()
 		require("ibl").overwrite({
 			exclude = { filetypes = { "dashboard", "help" } },
-			scope = { exclude = { language = { "lua", "python", "c", "haskell", "html", "css", "javascript" } } },
+			scope = { exclude = { language = { "lua", "python", "c", "haskell", "css", "javascript" } } },
 		})
 	end,
 }

@@ -3,7 +3,7 @@ local g = vim.g
 local o = vim.o
 local keymap = vim.keymap.set
 
-g.mapleader = ' '
+g.mapleader = " "
 
 -- indent settings
 o.tabstop = 4 -- A TAB character looks like 4 spaces
@@ -19,7 +19,7 @@ o.smartcase = true
 
 -- Save undo history
 o.undofile = true
-o.clipboard = 'unnamedplus'
+o.clipboard = "unnamedplus"
 
 opt.laststatus = 3
 opt.showmode = false
@@ -33,31 +33,31 @@ opt.sidescrolloff = 3
 vim.wo.nu = true
 -- Configuration for diagnostics
 local signs = {
-    { name = 'DiagnosticSignError', text = ' ' },
-    { name = 'DiagnosticSignWarn', text = ' ' },
-    { name = 'DiagnosticSignHint', text = '' },
-    { name = 'DiagnosticSignInfo', text = ' ' },
+	{ name = "DiagnosticSignError", text = " " },
+	{ name = "DiagnosticSignWarn", text = " " },
+	{ name = "DiagnosticSignHint", text = "" },
+	{ name = "DiagnosticSignInfo", text = " " },
 }
 
 for _, sign in ipairs(signs) do
-    vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = '' })
+	vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
 end
 
 local config = {
-    signs = {
-        active = signs, -- show signs
-    },
-    update_in_insert = true,
-    underline = true,
-    severity_sort = true,
-    float = {
-        focusable = true,
-        style = 'minimal',
-        border = 'single',
-        source = 'always',
-        header = 'Diagnostic',
-        prefix = '',
-    },
+	signs = {
+		active = signs, -- show signs
+	},
+	update_in_insert = true,
+	underline = true,
+	severity_sort = true,
+	float = {
+		focusable = true,
+		style = "minimal",
+		border = "single",
+		source = "always",
+		header = "Diagnostic",
+		prefix = "",
+	},
 }
 
 vim.diagnostic.config(config)
