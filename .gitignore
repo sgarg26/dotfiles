@@ -4,3 +4,4 @@
 !/kitty/
 !.gitignore
 /nvim/lazy-lock.json
+nvim/*.toml
