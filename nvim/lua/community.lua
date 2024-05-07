@@ -11,6 +11,7 @@ return {
     { import = "astrocommunity.pack.lua" },
     { import = "astrocommunity.pack.cpp" },
     { import = "astrocommunity.pack.python" },
-    { import = "astrocommunity.completion.copilot-lua" },
+    { import = "astrocommunity.pack.html-css" },
+    { import = "astrocommunity.pack.typescript" },
     -- import/override with your plugins folder
 }

@@ -2,6 +2,7 @@
 !/nvim/
 !/fish/
 !/kitty/
+!/waybar/
 !.gitignore
 /nvim/lazy-lock.json
 nvim/*.toml

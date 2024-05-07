@@ -22,25 +22,23 @@ return {
         "goolord/alpha-nvim",
         opts = function(_, opts)
             -- customize the dashboard header
-            opts.section.header.val = {
-                " █████  ███████ ████████ ██████   ██████",
-                "██   ██ ██         ██    ██   ██ ██    ██",
-                "███████ ███████    ██    ██████  ██    ██",
-                "██   ██      ██    ██    ██   ██ ██    ██",
-                "██   ██ ███████    ██    ██   ██  ██████",
-                " ",
-                "    ███    ██ ██    ██ ██ ███    ███",
-                "    ████   ██ ██    ██ ██ ████  ████",
-                "    ██ ██  ██ ██    ██ ██ ██ ████ ██",
-                "    ██  ██ ██  ██  ██  ██ ██  ██  ██",
-                "    ██   ████   ████   ██ ██      ██",
-            }
-            return opts
+            local logo = [[
+███▄▄▄▄      ▄████████  ▄██████▄   ▄█    █▄   ▄█    ▄▄▄▄███▄▄▄▄   
+███▀▀▀██▄   ███    ███ ███    ███ ███    ███ ███  ▄██▀▀▀███▀▀▀██▄ 
+███   ███   ███    █▀  ███    ███ ███    ███ ███▌ ███   ███   ███ 
+███   ███  ▄███▄▄▄     ███    ███ ███    ███ ███▌ ███   ███   ███ 
+███   ███ ▀▀███▀▀▀     ███    ███ ███    ███ ███▌ ███   ███   ███ 
+███   ███   ███    █▄  ███    ███ ███    ███ ███  ███   ███   ███ 
+███   ███   ███    ███ ███    ███ ███    ███ ███  ███   ███   ███ 
+ ▀█   █▀    ██████████  ▀██████▀   ▀██████▀  █▀    ▀█   ███   █▀  
+        ]]
+            logo = string.rep("\n", 8) .. logo .. "\n\n"
+            opts.section.header.val = logo
         end,
     },
 
     -- You can disable default plugins as follows:
-    { "max397574/better-escape.nvim", enabled = false },
+    { "max397574/better-escape.nvim", enabled = true },
 
     -- You can also easily customize additional setup of plugins that is outside of the plugin's setup call
     {
