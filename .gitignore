@@ -6,3 +6,4 @@
 !.gitignore
 /nvim/lazy-lock.json
 nvim/*.toml
+*.bak
