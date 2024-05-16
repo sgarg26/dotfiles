@@ -13,9 +13,9 @@
         "hyprland/workspaces",
         "tray"
     ],
-    "modules-center": [
-        "hyprland/window"
-    ],
+    // "modules-center": [
+    //     "hyprland/window"
+    // ],
     "modules-right": [
         "backlight",
         "pulseaudio",
